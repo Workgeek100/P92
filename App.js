@@ -1,21 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import {Text, View, TouchableOpacity, TextInput, StyleSheet, Alert} from 'react-native';
+import SignUpScreen from './screens/SignUpScreen';
+import SignInScreen from './screens/SignInScreen';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation'; 
+import {RFValue} from 'react-native-responsive-fontsize'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export default class App extends React.Component { 
+  render(){
+    return(
+      <View style = {styles.container}>
+        <Text style = {styles.text}></Text>
+        <AppContainer />
+      </View>
+    )
+  }
 }
 
+const AppNavigator = createSwitchNavigator({
+  SignIn : {screen : SignInScreen},
+  SignUp : {screen : SignUpScreen}
+})
+
+const AppContainer = createAppContainer(AppNavigator)
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  container : {
+    flex:1,
+    justifyContent :'center',
+    alignItems:'center'
   },
-});
+  text:{
+    fontSize:RFValue(20),
+    fontWeight:'bold',
+    fontStyle :'italic',
+  }
+})
